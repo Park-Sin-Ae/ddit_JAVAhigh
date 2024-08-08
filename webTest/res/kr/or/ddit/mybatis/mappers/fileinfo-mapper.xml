@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 이 문서는 myBatis에서 처리할 SQL문을 작성하는 문서입니다. -->
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<!-- 
+	<mapper>태그의 namespace속성에 설정되는 값은 Java에서 
+	SQL문을 호출할 때 같이 사용되는 이름이다.
+ -->
+<mapper namespace="fileinfo">
+	<insert id="insertFileinfo" parameterType="fileVo">
+		INSERT INTO FILEINFO
+		(FILE_NO, FILE_WRITER, ORIGIN_FILE_NAME, SAVE_FILE_NAME, FILE_SIZE, FILE_DATE)
+		VALUES(FILEINFO_SEQ.NEXTVAL, #{file_writer}, #{origin_file_name},
+				#{save_file_name}, #{file_size}, SYSDATE)
+	</insert>
+	<select id="getAllFileinfo" resultType="fileVo">
+		SELECT * FROM FILEINFO
+		ORDER BY FILE_NO DESC	
+	</select>
+	
+	<select id="getFileinfo" parameterType="int" resultType="fileVo">
+		SELECT * FROM FILEINFO
+		WHERE FILE_NO = #{file_no}
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

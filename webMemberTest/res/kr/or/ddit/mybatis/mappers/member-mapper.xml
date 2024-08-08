@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 이 문서는 myBatis에서 처리할 SQL문을 작성하는 문서입니다. -->
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mymember">
+	
+	<select id="getLoginMember" parameterType="memVo" resultType="memVo">
+		select * from mymember
+		where mem_id = #{mem_id} and mem_pass = #{mem_pass}
+	</select>
+	
+	<select id="selectMember" resultType="memVo">
+		select * from mymember
+	</select>
+	
+	<!-- 
+		* parameterType으로 map을 받으면 SQL문에는 변수명  대신 Map의 key값으로 한다.
+		
+		* 파라미터로 가져온 값을 '컬럼명'등의 자리에서 사용할 경우에는
+		달러 ($)기호로,
+	 -->	
+
+<!-- 	 key값 정보 ==> 회원ID(memID), 컬럼명(field), 데이터값(data) -->
+	<update id="updateMember2" parameterType="map">
+		update mymember set 
+		${field} = #{data} 
+		where mem_id = #{memID}
+	</update>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

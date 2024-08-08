@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 이 문서는 myBatis에서 처리할 SQL문을 작성하는 문서입니다. -->
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<!-- 
+	<mapper>태그의 namespace속성에 설정되는 값은 Java에서 
+	SQL문을 호출할 때 같이 사용되는 이름이다.
+ -->
+<mapper namespace="lprod">
+	<!-- 
+	이 영역에는 처리할 SQL문에 맞는 태그를 사용하여 SQL문을 작성한다.
+	
+	* 사용할 수 있는 태그들..
+	<select> SELECT 구문 ~~~</select>
+	<insert> INSERT 구문 ~~~</insert>
+	<update> UPDATE 구문~~~</update>
+	<delete> DELETE 구문 ~~~</delete>
+	...
+	-->
+	
+	<!--
+	* id 속성 ==> 실행할 SQL문이 있는 태그를 Java에서 호출할 떄 사용되는 이름
+			Java에서 호출할 때는 <mapper>태그의 namespace속성과 연결해서 
+			사용한다.
+			예)"namespace속성값.실행id속성값" ==> "lprod.insertLprod"
+			
+	* parameterType 속성
+		 ==> 작성된 SQL문에 사용될 데이터가 들어있는 객체를 기술한다.
+		 ==> 보통 VO클래스, Java의 기본 자료형 이름, Map객체 등이 사용된다.
+		 	(VO클래스 등을 기술할 때는 해당 클래스의 전체 이름을 기술해야 한다.)
+		 	(<typeAlias>태그에 지정한 alias명을 사용할 수 있다.)
+	-->
+<!-- 	<insert id="insertLprod" parameterType="kr.or.ddit.vo.LprodVO"> -->
+	<insert id="insertLprod" parameterType="lprodVo">
+		insert into lprod (lprod_id, lprod_gu, lprod_nm)
+		values(#{lprod_id}, #{lprod_gu}, #{lprod_nm})
+	</insert>
+	
+	<update id="updateLprod" parameterType="kr.or.ddit.vo.LprodVO">
+		update lprod set 
+		lprod_id = #{lprod_id},
+		lprod_nm = #{lprod_nm}
+		where lprod_gu = #{lprod_gu}
+	</update>
+	
+	<!-- 
+		parameterType 속성에 설정되는  값이 단일 값이면
+		SQL문에 이 값을 나타내는 변수명은 사용자가 임의로 지정할 수 있다.
+	 -->
+	<delete id="deleteLprod" parameterType="String">
+<!-- 		delete from lprod where lprod_gu = #{lprod_gu} -->
+		delete from lprod where lprod_gu = #{sksks}		<!-- 아무렇게나 써도 된다! -->
+	</delete>
+	
+	<!-- 
+		* resultType 속성 ==> SELECT문을 처리한 결과를 저장할 VO클래스나
+				자바의 기본 자료형 또는 Map객체를 지정할 수 있다.
+				
+				SELECT문을 처리한 결과가 여러개의 레코드이면 java에서 
+				'selectList()'메서드를 이용하여 처리하는데 이 때 데이터들은
+				자동으로 List에 저장되어 반환된다. 
+				그래서 결과가 여러개 일 경우에도 이 resultType속성에 지정하는 것은
+				1개의 레코드가 저장될 클래스나 자료형 이름을 지정하면 된다.
+	 -->
+	 
+	<select id="getAllLprod" resultType="lprodVo">
+		select * from lprod
+	</select>
+	
+	<select id="getLprod" parameterType="String" resultType="lprodVo">
+		select * from lprod
+		where lprod_gu = #{lprod_gu}
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
